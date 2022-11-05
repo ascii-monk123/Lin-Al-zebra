@@ -1,0 +1,365 @@
+\documentclass[]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage[%
+margin=2cm,
+includefoot,
+bottom=2.55cm,
+top=2.025cm,
+headsep=0.5cm,
+footskip=0.65cm
+]{geometry}
+
+\definecolor{myblue}{RGB}{0,46,142}
+
+\newtcolorbox[auto counter]{mytheorem}[1][]{%
+	enhanced jigsaw,
+	colback=white,
+	colframe=myblue,
+	coltitle=myblue,
+	fonttitle=\bfseries,
+	sharp corners,
+	detach title,
+	enlarge left by=18mm,
+	width=\linewidth-18mm,
+	underlay unbroken and first={%
+		\node[above,text=myblue,font=\bfseries,align=center] at ([xshift=-.5\textwidth,yshift=-7mm]interior.north) {\thetcbcounter};
+	},
+	breakable,
+	pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+\graphicspath{ {./images/} }
+
+
+%opening
+\title{L-18: Determinants and their Properties}
+\author{Aahan Singh Charak\\Computer Science Grad}
+
+\begin{document}
+	\maketitle
+	\section{Determinants}
+	\vspace{10pt}
+	
+	\noindent
+	Determinant is a number which is associated with every squared matrix. A matrix is invertible if it's determinant is non-zero. It is denoted by det(A) or $\mid A \mid$. For a 2*2 matrix, the formula for determinant is:\\
+	
+	\noindent
+	\[
+  \begin{vmatrix}
+  	a&b\\
+  	c&d
+  \end{vmatrix}=ad-bc
+	\]\\
+	
+	In order to derive this formula, we will make use of some determinant properties. The formula will hold true for an n-dimensional squared matrix.\\
+\vspace{10pt}
+
+\section{Properties of determinants}
+\vspace{10pt}
+
+\subsection{Property 1: Determinant of identity matrix is 1}
+\vspace{10pt}
+
+\noindent
+$\det(I)=1$	
+\vspace{10pt}
+
+\subsection{Property 2: Exchanging rows reverses the sign of the determinant.}
+\vspace{10pt}
+	\[ 
+\det(P)=
+\begin{cases} 
+	1 & if \  exchanges \  are \ even \\
+	-1 & if \  exchanges \ are \ odd \\ 
+\end{cases}
+\]\\
+
+\noindent
+Example:\\
+
+\noindent
+\[
+\begin{vmatrix}
+	1&0\\
+	0&1
+\end{vmatrix}=1 \ and \ , \  
+\begin{vmatrix}
+	0&1\\
+	1&0
+\end{vmatrix}=-1
+\]
+
+\vspace{10pt}
+
+\subsection{Third property has two parts:}
+\vspace{10pt}
+
+\subsubsection{ 3(a) Scaling linear operation}
+\vspace{10pt}
+
+\[
+\begin{vmatrix}
+	ta&tb\\
+	c&d
+\end{vmatrix}=t \begin{vmatrix}
+a&b\\
+c&d
+\end{vmatrix}
+\]\\
+
+This property can be used only on a single row. Other rows must remain same.
+
+\vspace{10pt}
+
+\subsubsection{3(b) Linear addition property}
+\vspace{10pt}
+
+\[
+\begin{vmatrix}
+	a+a'&b+b'\\
+	c&d
+\end{vmatrix}=\begin{vmatrix} 
+a&b\\
+c&d
+\end{vmatrix}+\begin{vmatrix}
+a'&b'\\
+c&d
+\end{vmatrix}
+\]\\
+
+Like property 3(a), this property can only be used with one row at a time.\\
+
+\noindent
+Properties 3(a) and 3(b) are about linear combinations of nth row.\\
+
+\begin{mytheorem}
+	Determinant behaves like a linear function of nth row if all other rows remain the same.\\
+	
+	This does not mean that det(A+B) = det(A)+det(B)
+\end{mytheorem}
+
+\noindent
+Using these three fundamental properties, we will derive more properties.
+\vspace{10pt}
+\subsection{Property 4: If two rows are equal, determinant is zero.}
+
+\vspace{10pt}
+
+Suppose, we have an $R^{n \times n }$ dimensional matrix with two of its rows having the same values. Suppose, we exchange the two rows. Since, the two rows are the same, the determinant must not change its sign. However, according to the second property, the sign must become negative. Now, the sign is positive but it doesn't change to negative, this must mean that the determinant is zero.
+Q.E.D
+\vspace{10pt}
+\subsection{Property 5: Determinant doesn't change if we perform elimination operations on the matrix.}
+
+\vspace{10pt}
+
+Or \\
+
+\noindent
+A=LU\\
+det(A)=det(U)\\
+
+\noindent
+example proof:\\
+
+\noindent
+\[
+\begin{vmatrix}
+	a&b\\
+	c&d
+\end{vmatrix}
+\]\\
+r2=r2-l*r1,
+
+\[
+\begin{vmatrix}
+	a&b\\
+	c-la&d-lb
+\end{vmatrix}
+\]\\
+
+\[
+= \begin{vmatrix}
+	a&b\\
+	c&d
+\end{vmatrix}+ \begin{vmatrix}
+a&b\\
+-la&&lb
+\end{vmatrix}\{property \ 3(b)\}
+\]\\
+
+\[
+=\begin{vmatrix}
+	a&b\\
+	c&d
+\end{vmatrix}-l \begin{vmatrix}
+a&b\\
+a&b
+\end{vmatrix}\{ property \ 3(a)\}
+\]\\
+
+\[
+=\begin{vmatrix}
+	a&b\\
+	c&d
+\end{vmatrix} \{ Property \ 4\}
+\]\\
+
+\[
+\textbf{Q.E.D}
+\]
+
+\vspace{10pt}
+
+\subsection{Property 6: Row of zeros leads to det(A)=0}
+
+\vspace{10pt}
+
+\noindent
+Example proof:
+
+\[
+5\begin{vmatrix}
+	0&0\\
+	c&d
+\end{vmatrix}=\begin{vmatrix}
+5.0&5.0\\
+c&d
+\end{vmatrix}
+\]
+\[
+5 \mid A \mid = \mid A \mid
+\]\\
+
+This must mean that det(A) = 0\\
+
+\textbf{Q.E.D}
+
+\vspace{10pt}
+
+\subsection{Property 7: The determinant of a triangular matrix is the product of elements present at the diagonal.}
+\vspace{10pt}
+
+For this example, consider an upper triangular matrix U. U is of the form:\\
+
+\noindent
+\[
+U=\begin{bmatrix}
+	d1&....\\
+	0&d2&.....\\
+	0&0.....&dn
+\end{bmatrix}
+\]\\
+
+\noindent
+The non zero elements above the diagonal can be removed using elimination. By property 5 of determinants, we know that the determinant will remain the same in the case of elimination. By property 3(a), we can take all diagonal elements out of the reduced matrix(matrix after removing upper elements). So, this means that the determinant is:\\
+
+\noindent
+$\mid U \mid = (d1)(d2)...(dn)\mid I \mid$\\
+
+\noindent
+$\mid U \mid = (d1)(d2)...(dn)$ \{ Property 1\}\\
+
+\noindent
+Using this intuition, we can calculate the determinant of any n-dimensional squared matrix.\\
+
+\noindent
+\textbf{Steps to calculate determinant of any n-dimensional squared matrix:}\\
+\begin{itemize}
+	\item Perform gaussian elimination and convert the matrix into upper triangular form.
+	\item Caclulate the product of the pivot elements in the upper triangular matrix. The elements above the diagonal won't have any effect as they can be easily removed using elimination.\\
+\end{itemize}
+	
+\noindent
+\textbf{Suppose the diagonal entry is zero.(Singular). What is the determinant?}\\
+
+In such cases, we can get a zero row through elimination. According to rule 6, the determinant will be zero.\\
+
+\begin{mytheorem}
+	\begin{itemize}
+		\item $\mid A \mid$ is zero when A is singular.
+		\item $\mid A \mid \neq 0$ when A is invertible.
+	\end{itemize}
+\end{mytheorem}
+\vspace{5pt}
+\noindent
+\textbf{Derivation of the 2*2 matrix determinant formula.}\\
+
+\noindent
+\[
+A=\begin{bmatrix}
+	a&b\\
+	c&d
+\end{bmatrix}
+\]
+\noindent
+r2 = r2- $\frac{c}{a}$r1\\
+
+\noindent
+\[
+A=\begin{bmatrix}
+	a&b\\
+	0&d-\frac{c}{a}b
+\end{bmatrix}
+\]\\
+
+\noindent
+\[
+\therefore \det{A} = a \times (d-\frac{c}{a}b)
+\]
+\[
+\det{A} = ad-bc
+\]
+
+\vspace{10pt}
+
+\subsection{Property 8: Determinant of product of two matrices}
+\vspace{10pt}
+
+det(AB)=det(A)$\times$det(B)\\
+
+\noindent
+\begin{equation*}
+	\begin{split}
+	det(A^{-1}) = ?\\
+	A^{-1}A=I\\
+	det(A^{-1})*det(A)=1\\
+	det(A^{-1})=\frac{1}{det(A)}
+	\end{split}
+\end{equation*}
+\vspace{10pt}
+
+\begin{mytheorem}[title = Some important formulas]
+	\begin{itemize}
+		\item $det(A^{-1})=\frac{1}{det(A)}$
+		\item $det(A^2)=(det(A))^2$
+		\item $det(2A)=2^ndet(A)$
+	\end{itemize}
+\end{mytheorem}
+
+\vspace{10pt}
+
+\subsection{Property 9: Determinant of transpose of a matrix is the same as the determinant of the matrix.}
+
+\vspace{10pt}
+
+\noindent
+\textbf{Proof:}\\
+
+\noindent
+\begin{equation*}
+	\begin{split}
+		A=LU\\
+		A^T=U^TL^T\\
+		\mid U^T \mid \mid L^T \mid = \mid U^T \mid\\
+		\mid L \mid = \mid L^T \mid = 1,\ as \  the \ diagonals \  are \ 1 \  and \ other \  numbers \  can \ be \ removed \  using \ elimination.
+	\end{split}
+\end{equation*}
+
+\noindent
+Now, determinants of U transpose and U are equal as we can remove the non-diagonal elements in both, and the diagonal elements remain the same.\\
+
+
+\end{document}
