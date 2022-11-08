@@ -1,0 +1,149 @@
+\documentclass[]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage[%
+margin=2cm,
+includefoot,
+bottom=2.55cm,
+top=2.025cm,
+headsep=0.5cm,
+footskip=0.65cm
+]{geometry}
+
+\definecolor{myblue}{RGB}{0,46,142}
+
+\newtcolorbox[auto counter]{mytheorem}[1][]{%
+	enhanced jigsaw,
+	colback=white,
+	colframe=myblue,
+	coltitle=myblue,
+	fonttitle=\bfseries,
+	sharp corners,
+	detach title,
+	enlarge left by=18mm,
+	width=\linewidth-18mm,
+	underlay unbroken and first={%
+		\node[above,text=myblue,font=\bfseries,align=center] at ([xshift=-.5\textwidth,yshift=-7mm]interior.north) {\thetcbcounter};
+	},
+	breakable,
+	pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+\graphicspath{ {./images/} }
+
+
+%opening
+\title{L-19: Determinant Formulas and Co-factor Matrix}
+\author{Aahan Singh Charak\\Computer Science Grad}
+
+\begin{document}
+	\maketitle
+	\section{Extended Formula}
+	\vspace{10pt}
+	
+	\textbf{Method:} Take each row of matrix at a time and split row into no.of column pieces.(property 3b)\\
+	
+	\noindent
+	\textbf{example} \\
+	
+	\[
+	\begin{vmatrix}
+		a&b\\
+		c&d
+	\end{vmatrix}=\begin{vmatrix}
+	a&0\\
+	c&0
+\end{vmatrix}+ \begin{vmatrix}
+a&0\\
+0&d
+\end{vmatrix} + \begin{vmatrix}
+0&b\\
+0&d
+\end{vmatrix} + \begin{vmatrix}
+0&b\\
+c&0
+\end{vmatrix}
+	\]\\
+	
+	\noindent
+	Only second and last determinants are useful as the rest have 0 columns.(singular matrix)\\
+	
+	\noindent
+	Consider a 3*3 matrix with elements:\\
+	
+	\[
+	\begin{bmatrix}
+		a_{11} & a_{12} & a_{13}\\
+		a_{21} & a_{22} & a_{23}\\
+		a_{31} & a_{32} & a_{33}
+	\end{bmatrix}
+	\]\\
+	
+	
+	\noindent
+	For a 3*3 matrix 1st row will be divided into 3 pieces. For each of these pieces, 2nd row will give three pieces, therefore equating to 9 pieces. Similarily, considering third row, we get a total of 27 pieces. Explanation is in supplementary notes 1. However, out of these 27 pieces only some are useful. The useful determinants give the formula(6 total):\\
+	
+	\noindent
+	$\mid A \mid = a_{11}(a_{22}a_{33}-a_{32}a_{23}) + a_{12}(a_{23}a_{31}-a_{21}a_{33}) + a_{13}(a_{33}a_{21}-a_{31}a_{22})$\\
+	
+	\vspace{10pt}
+	
+	\subsection{General Formula}
+	\vspace{10pt}
+	
+	\noindent
+	For 2*2 = 2 useful\\
+	For 3*3 = 6 useful\\
+	For n*n = n! useful\\
+	
+	\noindent
+	$\det{A} = \sum_{r=1}^{n!} a_{1\alpha}a_{2\beta}a_{3\gamma}....a_{n\omega}$\\
+	
+	\noindent
+	Where r=number of permutations and [$\alpha , \beta , \gamma, \delta$ etc. are permutations of 1 to nth column]\\
+	
+	\vspace{10pt}
+	
+	\section{Co-Factors}
+	
+	\vspace{10pt}
+	
+		$\mid A \mid = a_{11}(a_{22}a_{33}-a_{32}a_{23}) + a_{12}(a_{23}a_{31}-a_{21}a_{33}) + a_{13}(a_{33}a_{21}-a_{31}a_{22})$\\
+		
+	\noindent
+	Here, the elements in parenthesis are co-factors.
+	
+	\begin{mytheorem}[title = General formula for co-factor]
+		Cofactor of $a_{ij}$ = $C_{ij}$ = $\pm \det{(n-1 \ dimensional \ matrix \ with \ row \ i \ and \ column \ j \ erased)}$\\
+			
+			\[ 
+		Where \ sign \ is,
+		\begin{cases} 
+			+ & if \ i+j=even\\
+			- & if \ i+j=odd \\ 
+		\end{cases}
+		\]\\
+
+	\end{mytheorem}
+
+\vspace{10pt}
+
+\subsubsection{Cofactor Formula for Determinants}
+\vspace{10pt}
+
+Determinant formula along ith row is given by(we can take along column too as transpose is equal in case of determinants.)\\
+
+\noindent
+$\det{A} = a_{i1}C_{i1}+a_{i2}C_{i2}+....+a_{in}C_{in}$\\
+
+
+\begin{mytheorem}[title=Extra material]
+	Extra material to develop more intuition can be found in book and supplementary notes 1.
+\end{mytheorem}
+
+	
+	
+	
+\end{document}
