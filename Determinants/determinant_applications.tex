@@ -1,0 +1,136 @@
+\documentclass[]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage[%
+margin=2cm,
+includefoot,
+bottom=2.55cm,
+top=2.025cm,
+headsep=0.5cm,
+footskip=0.65cm
+]{geometry}
+
+\definecolor{myblue}{RGB}{0,46,142}
+
+\newtcolorbox[auto counter]{mytheorem}[1][]{%
+	enhanced jigsaw,
+	colback=white,
+	colframe=myblue,
+	coltitle=myblue,
+	fonttitle=\bfseries,
+	sharp corners,
+	detach title,
+	enlarge left by=18mm,
+	width=\linewidth-18mm,
+	underlay unbroken and first={%
+		\node[above,text=myblue,font=\bfseries,align=center] at ([xshift=-.5\textwidth,yshift=-7mm]interior.north) {\thetcbcounter};
+	},
+	breakable,
+	pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+\graphicspath{ {./images/} }
+
+
+%opening
+\title{L-20: Determinants and their Applications}
+\author{Aahan Singh Charak\\Computer Science Grad}
+
+\begin{document}
+	\maketitle
+	\section{Inverse Matrix}
+	\vspace{10pt}
+	
+	For an n dimensional matrix, the formula for inverse can also be given by:\\
+	
+	\[
+	A^{-1}=\frac{1}{\det(A)}*C^T
+	\]\\
+	
+	\noindent
+	Where, C is the matrix of co-factors.\\
+	
+	\noindent
+	For a 2*2 matrix, the formula will be:\\
+	
+	\[
+	A^{-1}=\frac{1}{ad-bc}\begin{bmatrix}
+		d&-b\\
+		-c&a
+	\end{bmatrix}
+	\]\\
+	
+	\vspace{10pt}
+	
+	\subsection{Why does this work?}
+	\vspace{10pt}
+	$A.A^T=I$\\
+	
+	\noindent
+	$A.C^T=det(A).I$\\
+	
+	\[
+\begin{bmatrix}
+	a_{11}&a_{12}&...&a_{2n}\\
+	a_{21}&a_{22}&...&a_{2n}\\
+	.&.&.&.\\
+	a_{n1}&a_{n2}&...&a_{nn}
+\end{bmatrix}.\begin{bmatrix}
+c_{11}&c_{21}&...&c_{n1}\\
+c_{12}&c_{22}&...&c_{n2}\\
+.&.&.&.\\
+c_{1n}&c_{2n}&...&c_{nn}
+\end{bmatrix}=\begin{bmatrix}
+detA&...&0\\
+0&detA&...\\
+0&...&detA
+\end{bmatrix}
+	\]\\
+	
+\noindent
+The first element of res matrix\\
+
+\noindent
+$detA_{11}=a_{11}c_{11}+a_{12}c_{12}+...+a_{1n}c_{1n}$ [This is the formula for determinant.(Cofactor formula)]\\
+
+\noindent
+Detailed proof can be seen from the book. Some information is mentioned in supplementary notes 2.\\
+
+\vspace{10pt}
+
+\section{Cramers rule}
+
+\vspace{10pt}
+
+$Ax=b$\\
+$x=A_{-1}b$\\
+
+\noindent
+$x=\frac{1}{\det{A}}.C^Tb$\\
+
+\noindent
+According to cramer's rule, the individual components of x can be written as:\\
+
+\noindent
+$x_1=\frac{\det{B_1}}{\det{A}}$\\
+
+\noindent
+$x_2=\frac{\det{B_2}}{\det{A}}$\\
+
+\noindent
+$x_i=\frac{\det{B_i}}{\det{A}}$\\
+
+\noindent
+Where, $B_i$ is A with column i replaced by b.\\
+
+\begin{mytheorem}[title=Note]
+	Use elimination wherever possible as it is computationally less expensive than these formulas.
+\end{mytheorem}
+
+\vspace{10pt}
+
+\section{Area and volumes of shapes}
+These formulas and their proofs can be found in supplementary material 2 and the book.\\
+\end{document}
