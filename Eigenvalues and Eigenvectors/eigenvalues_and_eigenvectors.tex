@@ -1,0 +1,188 @@
+\documentclass[]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage[%
+margin=2cm,
+includefoot,
+bottom=2.55cm,
+top=2.025cm,
+headsep=0.5cm,
+footskip=0.65cm
+]{geometry}
+
+\definecolor{myblue}{RGB}{0,46,142}
+
+\newtcolorbox[auto counter]{mytheorem}[1][]{%
+	enhanced jigsaw,
+	colback=white,
+	colframe=myblue,
+	coltitle=myblue,
+	fonttitle=\bfseries,
+	sharp corners,
+	detach title,
+	enlarge left by=18mm,
+	width=\linewidth-18mm,
+	underlay unbroken and first={%
+		\node[above,text=myblue,font=\bfseries,align=center] at ([xshift=-.5\textwidth,yshift=-7mm]interior.north) {\thetcbcounter};
+	},
+	breakable,
+	pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+\graphicspath{ {./images/} }
+
+
+%opening
+\title{L-21: Eigenvalues and Eigenvectors}
+\author{Aahan Singh Charak\\Computer Science Grad}
+
+\begin{document}
+	\maketitle
+	\section{What are we looking at here?}
+	\vspace{10pt}
+	Consider a matrix A. Treat it like a function which takes in an input vector x. The function performs matrix multiplication and regurgitates something out. Suppose we get a multiple of the input vector as the output of the function. It would look something like this:\\
+	
+	\noindent
+	$A.x=\lambda x$\\
+	
+	\noindent
+	Here x is the eigenvector of matrix A and $\lambda$ is the eigenvalue for that eigenvector.\\
+	
+	\noindent
+	We will now discuss some examples to understand these concepts:\\
+	
+	\vspace{10pt}
+	
+	\subsection{Singular matrix example}
+    
+	\vspace{10pt}
+	
+	If A is a singular matrix, there exists an element in the nullspace of A which is non-zero. x is one of those elements. The eigenvalue in this case will be $\lambda$=0.
+	
+	\vspace{10pt}
+	
+	\subsection{Projection matrix example}
+	
+	\vspace{10pt}
+	
+	Suppose A has a column space which is an n-dimensional plane. Projection matrix P projects on this plane. Any vector x in the plane will give the vector when fed to the projection matrix. $\therefore$ $P.x=1.x$.\\
+	
+	\noindent
+	Here, eigenvector=x and eigenvalue=1.\\
+	
+	\noindent
+	Vector perpendicular to the plane will be another eigen vector for P, as $P.x=0.x$\\
+	
+	\noindent
+	Here, eigenvalue=0 and eigenvector=x.\\
+	
+	\begin{mytheorem}[title=Example 1]
+		\[
+		A=\begin{bmatrix}
+			0&1\\
+			1&0\\
+		\end{bmatrix}
+		\]\\
+		
+		\noindent
+		\textbf{What are the eigenvalues and eigenvectors}
+		
+		\noindent
+		\textbf{Sol: (a)} x=[1,1] is an evector and $\lambda =1$ is an evalue.
+		
+		\noindent
+		\textbf{(b)} x=[-1,1] is an evector and $\lambda = -1$ is an evalue.
+	
+		
+	\end{mytheorem}
+
+\vspace{10pt}
+
+\subsection{Relation between eigen values and trace of a matrix.}
+\vspace{10pt}
+
+$\sum{\lambda} = \sum{A_{ii}}$\\
+
+\noindent
+Where, i is the row number in an n*n dimensional squared matrix.\\
+
+\vspace{10pt}
+
+\section{Finding eigenvalues and eigenvectors}
+
+\vspace{10pt}
+
+\subsection{Eigenvectors}
+
+\vspace{10pt}
+
+\noindent
+We know that,\\
+
+\noindent
+$Ax=\lambda x$\\
+
+\noindent
+$(A-\lambda I)x=0$\\
+
+\noindent
+If an eigenvector x exists, then A-$\lambda I$ must be singular. We can substitute $\lambda$ to get a solution.
+
+\vspace{10pt}
+
+\subsection{Eigenvalues}
+
+\vspace{10pt}
+Since $A-\lambda I$ is singular, we can simply equate the determinant to 0 in order to find eigenvalues.\\
+
+\vspace{10pt}
+
+\noindent
+$\det{Singular}=0$\\
+
+\noindent
+$\det{A-\lambda I}=0$\\
+
+\noindent
+So, we first find eigenvalues and then find eigenvectors by substitution.\\
+
+\vspace{10pt}
+
+\section{A good property}
+
+\vspace{10pt}
+
+\noindent
+If we add nI to A, $\lambda$ increases by n. Eigenvectors on the other hand, remain the same.\\
+
+\noindent
+\textbf{Proof:}\\
+
+\noindent
+If, $Ax=\lambda x$\\
+Then, (A+nI)x=$\lambda x + nx$=($\lambda + n$)x.
+
+\vspace{10pt}
+\section{A property which doesn't exist tho.}
+\vspace{10pt}
+
+\noindent
+Suppose, Ax=$\lambda x$, and\\
+Bx=$\alpha x$\\
+
+\noindent
+But, (A+B)x=$(\lambda + \alpha)x$ does not always exist.\\
+
+\noindent
+x has to be the eigenvector for both matrices simultaneously for this property to exist. So, this property is not universal for all matrices A and B with eigenvectors and eigenvalues existing. Same can also be said for A.B\\
+
+\noindent
+More examples can be seen in supplementary notes 1.
+
+
+
+
+	
+\end{document}

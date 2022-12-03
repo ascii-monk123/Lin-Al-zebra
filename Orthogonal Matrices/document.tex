@@ -1,0 +1,46 @@
+\documentclass[]{article}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[many]{tcolorbox}
+\usepackage[%
+margin=2cm,
+includefoot,
+bottom=2.55cm,
+top=2.025cm,
+headsep=0.5cm,
+footskip=0.65cm
+]{geometry}
+
+\definecolor{myblue}{RGB}{0,46,142}
+
+\newtcolorbox[auto counter]{mytheorem}[1][]{%
+	enhanced jigsaw,
+	colback=white,
+	colframe=myblue,
+	coltitle=myblue,
+	fonttitle=\bfseries,
+	sharp corners,
+	detach title,
+	enlarge left by=18mm,
+	width=\linewidth-18mm,
+	underlay unbroken and first={%
+		\node[above,text=myblue,font=\bfseries,align=center] at ([xshift=-.5\textwidth,yshift=-7mm]interior.north) {\thetcbcounter};
+	},
+	breakable,
+	pad at break=1mm,
+	#1,
+	code={\ifdefempty{\tcbtitletext}{}{\tcbset{before upper={\tcbtitle\par\medskip}}}},
+}
+\graphicspath{ {./images/} }
+
+
+%opening
+\title{L-21: Eigenvalues and Eigenvectors}
+\author{Aahan Singh Charak\\Computer Science Grad}
+
+\begin{document}
+	\maketitle
+	\section{Least Squares}
+	\vspace{10pt}
+	
+\end{document}
